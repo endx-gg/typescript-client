@@ -41,6 +41,7 @@
     "node": ">=10"
   },
   "dependencies": {
+    "npm-run-all" : "*",
     "@bitauth/libauth": "^1.17.1",
     "ably": "^1.2.37"
   },
