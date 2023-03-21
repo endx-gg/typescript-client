@@ -10,7 +10,6 @@
   "keywords": [],
   "scripts": {
     "build": "run-p build:*",
-    "postinstall": "run-p build:*",
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
     "fix": "run-s fix:*",
