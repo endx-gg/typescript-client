@@ -1,1 +1,1 @@
-export * from './lib/client';
+export { createTradingClient } from './lib/client';

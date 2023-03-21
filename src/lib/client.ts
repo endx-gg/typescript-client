@@ -207,4 +207,4 @@ const createTradingClient = async (
   };
 };
 
-export default createTradingClient;
+export { createTradingClient };

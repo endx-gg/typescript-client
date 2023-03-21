@@ -96,4 +96,4 @@ declare const createTradingClient: (env: 'staging' | 'production' | 'sandbox', a
     readonly instruments: () => Promise<readonly PlayerInfo[]>;
     readonly makeOrder: (r: OrderRequest) => Promise<OrderResponse>;
 }>;
-export default createTradingClient;
+export { createTradingClient };
