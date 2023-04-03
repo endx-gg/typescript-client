@@ -102,6 +102,11 @@ type OrderResponse = {
   readonly reasonFailed?: string;
 };
 
+type CancelOrderRequest = {
+  readonly Instrument: string      ;
+	readonly StringMpOrderId: string ;
+}
+
 type Details = {
   readonly token: string;
   readonly clientId: string;
@@ -123,6 +128,7 @@ const createTradingClient = async (
   ) => Promise<void>;
   readonly instruments: () => Promise<readonly PlayerInfo[]>;
   readonly makeOrder: (r: OrderRequest) => Promise<OrderResponse>;
+  readonly cancelOrder: (r: CancelOrderRequest) => Promise<OrderResponse>;
 }> => {
   const slug =
     env === 'production' ? '' : env === 'staging' ? 'staging.' : 'sb.';
@@ -198,12 +204,22 @@ const createTradingClient = async (
     return response.json();
   };
 
+  const cancelOrder = async (r: CancelOrderRequest): Promise<OrderResponse> => {
+    const response = await fetch(`https://auth.${slug}endx.gg/cancelOrder`, {
+      method: 'POST',
+      headers: { 'Api-Key': apiKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify(r),
+    });
+    return response.json();
+  };
+
   return {
     subscribeToPortfolio,
     subscribeToOrderBook,
     subscribeToOrders,
     instruments,
     makeOrder,
+    cancelOrder,
   };
 };
 
