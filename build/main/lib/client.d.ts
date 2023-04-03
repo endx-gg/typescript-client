@@ -89,11 +89,16 @@ type OrderResponse = {
     readonly ticker?: string;
     readonly reasonFailed?: string;
 };
+type CancelOrderRequest = {
+    readonly Instrument: string;
+    readonly StringMpOrderId: string;
+};
 declare const createTradingClient: (env: 'staging' | 'production' | 'sandbox', apiKey: string) => Promise<{
     readonly subscribeToPortfolio: (listener: (data: Portfolio) => void) => Promise<void>;
     readonly subscribeToOrderBook: (id: string, listener: (data: OrderBook) => void) => Promise<void>;
     readonly subscribeToOrders: (listener: (data: readonly Trade[]) => void) => Promise<void>;
     readonly instruments: () => Promise<readonly PlayerInfo[]>;
     readonly makeOrder: (r: OrderRequest) => Promise<OrderResponse>;
+    readonly cancelOrder: (r: CancelOrderRequest) => Promise<OrderResponse>;
 }>;
 export { createTradingClient };
